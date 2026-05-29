@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>亚马逊 FBA 泳道图 - 在线文档</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #f4f6f8;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 24px 18px 48px;
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 28px 0 10px; font-size: 20px; }
+    p { margin: 8px 0; }
+    .muted { color: #5c6570; font-size: 14px; }
+    .card {
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 12px;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #0969da;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+    code {
+      background: #eef2f6;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: Consolas, Menlo, monospace;
+      font-size: 13px;
+    }
+    ul { margin: 8px 0 8px 20px; padding: 0; }
+    li { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>亚马逊 FBA 泳道图 - 在线文档</h1>
+    <p class="muted">版本说明：适用于当前编辑器（支持行列编辑、并行组、累计时间、备注框）。</p>
+
+    <div class="card">
+      <h2 style="margin-top:0">快速访问</h2>
+      <p>先启动本地服务，再打开下方地址：</p>
+      <p><code>http://localhost:8765/canvases/amazon-fba-swimlane-editor.html</code></p>
+      <a class="btn" href="./amazon-fba-swimlane-editor.html">打开泳道图编辑器</a>
+      <a class="btn" href="./amazon-fba-swimlane-editor.html#top-bar">跳转到编辑区</a>
+      <p class="muted">若页面未更新，请按 <code>Ctrl+Shift+R</code> 强制刷新。</p>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">核心操作</h2>
+      <ul>
+        <li><strong>行（泳道）</strong>：点击左侧泳道名选中，双击改名，拖拽上下排序。</li>
+        <li><strong>列（阶段）</strong>：点击列标题选中，双击改名，拖拽左右排序。</li>
+        <li><strong>节点</strong>：拖拽改行列，双击改名；顶部可编辑 ID、用时、并行组、备注、下游。</li>
+        <li><strong>备注框</strong>：节点可填备注，图中显示黄色备注框。</li>
+        <li><strong>列整理</strong>：点击工具栏 <code>整理列</code>，可按列内容重命名、排序并删除空列。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">时间与并行规则</h2>
+      <ul>
+        <li>底部时间支持小时/天口径（如 <code>8小时</code>、<code>3天</code>）。</li>
+        <li>并行组（同 <code>parallelGroup</code>）按 <strong>最长用时</strong> 合并，不做求和累计。</li>
+        <li>同列展示取该列最长累计节点作为代表，避免多条时间干扰阅读。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">数据与导入导出</h2>
+      <ul>
+        <li>保存：按钮 <code>保存</code> 会写入浏览器本地存储。</li>
+        <li>恢复默认：按钮 <code>恢复默认</code> 清理当前编辑状态。</li>
+        <li>导出/导入：通过 JSON 文件跨环境迁移流程配置。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">本地服务启动命令</h2>
+      <p>在项目根目录执行：</p>
+      <p><code>python -m http.server 8765</code></p>
+      <p class="muted">或直接双击 <code>canvases/start-editor-server.bat</code>。</p>
+    </div>
+  </div>
+</body>
+</html>
