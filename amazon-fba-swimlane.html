@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>亚马逊 FBA 全流程泳道图</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #f4f6f8;
+      color: #1a1a1a;
+    }
+    header {
+      padding: 14px 18px;
+      background: #fff;
+      border-bottom: 1px solid #dde3ea;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    h1 { margin: 0; font-size: 17px; }
+    .sub { margin: 4px 0 0; font-size: 12px; color: #5c6570; }
+    button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #c8d0d8;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button.primary { background: #0969da; color: #fff; border-color: #0969da; }
+    #err {
+      display: none;
+      margin: 12px 18px;
+      padding: 10px 14px;
+      background: #fff5f5;
+      border: 1px solid #f5c2c2;
+      color: #b42318;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    #wrap {
+      padding: 12px;
+      overflow: auto;
+      min-height: 60vh;
+      background: #e8ecf0;
+    }
+    #diagram {
+      display: block;
+      width: 100%;
+      min-width: 320px;
+      min-height: 320px;
+      background: #fff;
+      border: 1px solid #c8d0d8;
+      border-radius: 8px;
+    }
+    .hint {
+      padding: 8px 18px 14px;
+      font-size: 12px;
+      color: #5c6570;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>亚马逊 FBA 全流程泳道图</h1>
+      <p class="sub">工厂直发 ⑱→⑳ · 本地仓 ⑲→㉑ · ㉒ 汇合入 FBA</p>
+    </div>
+    <div>
+      <button class="primary" type="button" id="btnFit">适应宽度</button>
+      <button type="button" id="btnFull">原图尺寸</button>
+    </div>
+  </header>
+  <div id="err"></div>
+  <div id="wrap">
+    <svg id="diagram" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet"></svg>
+  </div>
+  <p class="hint">若仍空白：请用 Chrome / Edge 打开本文件；或按 Ctrl+F5 强制刷新。</p>
+
+  <script>
+    (function () {
+      const errEl = document.getElementById("err");
+      function fail(msg) {
+        errEl.style.display = "block";
+        errEl.textContent = "图表加载失败：" + msg;
+      }
+
+      try {
+        const LANES = [
+          { id: "dev", label: "产品开发" },
+          { id: "ops", label: "运营上架" },
+          { id: "supply", label: "供应链" },
+          { id: "logistics", label: "物流货代" },
+          { id: "amazon", label: "亚马逊" },
+        ];
+        const COL_W = 108;
+        const COL_N = 27;
+        const COL_LABELS = [
+          "①选品","②分析","③规格","④打样","⑤包装","⑥供应商","⑦品牌","⑧合规","⑨文案",
+          "⑩视觉","⑪SKU","⑫上架","⑬采购","⑭贴标","⑮STA","⑯箱唛","⑰分叉","⑱直发",
+          "⑲本地","⑳报关","㉑仓出","㉒头程","㉓清关","㉔送达","㉕上架","㉖可售",
+        ];
+        const NODES = [
+          { id: "mkt", lane: "dev", col: 0, label: "市场调研" },
+          { id: "comp", lane: "dev", col: 1, label: "竞品分析" },
+          { id: "spec", lane: "dev", col: 2, label: "规格定义" },
+          { id: "sample", lane: "dev", col: 3, label: "打样确认" },
+          { id: "pack", lane: "dev", col: 4, label: "包装方案" },
+          { id: "vendor", lane: "supply", col: 5, label: "供应商定点" },
+          { id: "brand", lane: "ops", col: 6, label: "品牌/UPC" },
+          { id: "cert", lane: "ops", col: 7, label: "合规认证" },
+          { id: "copy", lane: "ops", col: 8, label: "Listing文案" },
+          { id: "media", lane: "ops", col: 9, label: "图片&A+" },
+          { id: "sku", lane: "ops", col: 10, label: "创建SKU" },
+          { id: "upload", lane: "ops", col: 11, label: "上传Listing" },
+          { id: "fba", lane: "amazon", col: 11, label: "设置FBA" },
+          { id: "po", lane: "supply", col: 12, label: "下采购单" },
+          { id: "mfg", lane: "supply", col: 13, label: "生产&QC" },
+          { id: "label", lane: "supply", col: 14, label: "FNSKU贴标" },
+          { id: "sta", lane: "logistics", col: 15, label: "创建STA" },
+          { id: "carton", lane: "logistics", col: 16, label: "分仓箱唛" },
+          { id: "split", lane: "logistics", col: 17, label: "发货方式", shape: "diamond" },
+          { id: "fac-out", lane: "supply", col: 18, label: "工厂直发" },
+          { id: "wh-in", lane: "supply", col: 19, label: "入本地仓" },
+          { id: "fac-exp", lane: "logistics", col: 20, label: "工厂报关" },
+          { id: "wh-out", lane: "logistics", col: 21, label: "本地仓出库" },
+          { id: "freight", lane: "logistics", col: 22, label: "头程运输" },
+          { id: "import", lane: "logistics", col: 23, label: "目的港清关" },
+          { id: "deliver", lane: "amazon", col: 24, label: "送达FBA" },
+          { id: "receive", lane: "amazon", col: 25, label: "收货上架" },
+          { id: "live", lane: "amazon", col: 26, label: "库存可售" },
+        ];
+        const EDGES = [
+          ["mkt","comp"],["comp","spec"],["spec","sample"],["sample","pack"],["pack","vendor"],
+          ["vendor","brand"],["brand","cert"],["cert","copy"],["copy","media"],["media","sku"],
+          ["sku","upload"],["upload","fba"],["fba","po"],["po","mfg"],["mfg","label"],["label","sta"],
+          ["sta","carton"],["carton","split"],["split","fac-out"],["split","wh-in"],
+          ["fac-out","fac-exp"],["wh-in","wh-out"],["fac-exp","freight"],["wh-out","freight"],
+          ["freight","import"],["import","deliver"],["deliver","receive"],["receive","live"],
+          ["upload","po",1],["cert","po",1],
+        ];
+
+        const LANE_W = 88, LANE_H = 52, NODE_W = 68, NODE_H = 26, DIAMOND = 36, PAD = 10;
+        const HEADER_H = 40, COL_HEADER_H = 22;
+        const C = {
+          chrome: "#eef2f6", laneA: "#f8fafc", laneB: "#f0f4f8", grid: "#c8d0d8",
+          node: "#ffffff", stroke: "#8b949e", text: "#1a1a1a", sub: "#5c6570",
+          accent: "#0969da", fork: "#dbeafe", muted: "#8b949e",
+        };
+
+        const laneIndex = (id) => LANES.findIndex((l) => l.id === id);
+        const colLeft = (col) => PAD + LANE_W + col * COL_W;
+        const laneTop = (lane) => PAD + HEADER_H + COL_HEADER_H + laneIndex(lane) * LANE_H;
+        const maxCol = Math.max.apply(null, NODES.map((n) => n.col));
+        const W = PAD * 2 + LANE_W + (maxCol + 1) * COL_W;
+        const H = PAD * 2 + HEADER_H + COL_HEADER_H + LANES.length * LANE_H;
+        const nodeMap = {};
+        NODES.forEach((n) => { nodeMap[n.id] = n; });
+
+        function layout(n) {
+          const nh = n.shape === "diamond" ? DIAMOND : NODE_H;
+          const nw = n.shape === "diamond" ? DIAMOND : NODE_W;
+          const x = colLeft(n.col) + (COL_W - nw) / 2;
+          const y = laneTop(n.lane) + (LANE_H - nh) / 2;
+          return { x: x, y: y, w: nw, h: nh, cx: x + nw / 2, cy: y + nh / 2 };
+        }
+        const POS = {};
+        NODES.forEach((n) => { POS[n.id] = layout(n); });
+
+        function anchor(p, side) {
+          if (side === "right") return { x: p.x + p.w, y: p.cy };
+          if (side === "left") return { x: p.x, y: p.cy };
+          if (side === "bottom") return { x: p.cx, y: p.y + p.h };
+          return { x: p.cx, y: p.y };
+        }
+
+        function route(from, to, fl, tl) {
+          const dx = to.cx - from.cx;
+          const dy = to.cy - from.cy;
+          if (Math.abs(dy) < 8 && dx > 0) {
+            const a = anchor(from, "right"), b = anchor(to, "left"), mid = (a.x + b.x) / 2;
+            return "M" + a.x + "," + a.y + "L" + mid + "," + a.y + "L" + mid + "," + b.y + "L" + b.x + "," + b.y;
+          }
+          if (fl !== tl && dx > 0) {
+            const a = anchor(from, "right"), b = anchor(to, "left");
+            const mx = a.x + Math.max(24, dx * 0.5);
+            return "M" + a.x + "," + a.y + "L" + mx + "," + a.y + "L" + mx + "," + b.y + "L" + b.x + "," + b.y;
+          }
+          const a = anchor(from, "right"), b = anchor(to, "left");
+          const mx = a.x + 20;
+          return "M" + a.x + "," + a.y + "L" + mx + "," + a.y + "L" + mx + "," + b.y + "L" + b.x + "," + b.y;
+        }
+
+        function el(name, attrs, text) {
+          const e = document.createElementNS("http://www.w3.org/2000/svg", name);
+          if (attrs) {
+            for (var k in attrs) {
+              if (attrs[k] !== undefined && attrs[k] !== null && attrs[k] !== "") {
+                e.setAttribute(k, String(attrs[k]));
+              }
+            }
+          }
+          if (text != null) e.appendChild(document.createTextNode(text));
+          return e;
+        }
+
+        var svg = document.getElementById("diagram");
+        svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+
+        svg.appendChild(el("rect", { x: 0, y: 0, width: W, height: H, fill: "#ffffff" }));
+
+        var defs = el("defs");
+        var marker = el("marker", { id: "arr", markerWidth: 6, markerHeight: 6, refX: 5, refY: 3, orient: "auto" });
+        marker.appendChild(el("polygon", { points: "0,0 6,3 0,6", fill: C.accent }));
+        defs.appendChild(marker);
+        svg.appendChild(defs);
+
+        svg.appendChild(el("rect", { x: 0, y: 0, width: W, height: HEADER_H, fill: C.chrome }));
+        svg.appendChild(el("text", { x: PAD, y: 24, fill: C.text, "font-size": 12, "font-weight": "bold" }, "亚马逊 FBA：开发 → 上架 → 直发/本地仓 → 入仓"));
+
+        for (var i = 0; i < COL_N; i++) {
+          var x = colLeft(i);
+          var lbl = COL_LABELS[i] || "";
+          svg.appendChild(el("rect", { x: x, y: HEADER_H, width: COL_W, height: COL_HEADER_H, fill: C.chrome, stroke: C.grid, "stroke-width": 0.5 }));
+          svg.appendChild(el("text", { x: x + COL_W / 2, y: HEADER_H + 15, "text-anchor": "middle", fill: C.sub, "font-size": 8 }, lbl));
+        }
+
+        var forkX = colLeft(17);
+        var forkW = colLeft(26) + COL_W - forkX;
+        svg.appendChild(el("rect", { x: forkX, y: laneTop("supply"), width: forkW, height: LANE_H * 2, fill: C.fork }));
+
+        var gridW = (maxCol + 1) * COL_W;
+        for (var li = 0; li < LANES.length; li++) {
+          var lane = LANES[li];
+          var y = laneTop(lane.id);
+          var fill = li % 2 === 0 ? C.laneA : C.laneB;
+          svg.appendChild(el("rect", { x: PAD, y: y, width: LANE_W, height: LANE_H, fill: fill, stroke: C.grid, "stroke-width": 0.5 }));
+          svg.appendChild(el("rect", { x: PAD + LANE_W, y: y, width: gridW, height: LANE_H, fill: fill, stroke: C.grid, "stroke-width": 0.5 }));
+          for (var ci = 0; ci < COL_N; ci++) {
+            svg.appendChild(el("line", { x1: colLeft(ci), y1: y, x2: colLeft(ci), y2: y + LANE_H, stroke: C.grid, "stroke-width": 0.5 }));
+          }
+          svg.appendChild(el("text", { x: PAD + 6, y: y + 30, fill: C.text, "font-size": 10, "font-weight": "bold" }, lane.label));
+        }
+
+        var edgeG = el("g");
+        EDGES.forEach(function (e) {
+          var from = e[0], to = e[1], dashed = e[2];
+          var f = POS[from], t = POS[to];
+          var pathAttrs = {
+            d: route(f, t, nodeMap[from].lane, nodeMap[to].lane),
+            fill: "none",
+            stroke: dashed ? C.muted : C.accent,
+            "stroke-width": dashed ? 1 : 1.2,
+          };
+          if (dashed) pathAttrs["stroke-dasharray"] = "4 3";
+          else pathAttrs["marker-end"] = "url(#arr)";
+          edgeG.appendChild(el("path", pathAttrs));
+        });
+        svg.appendChild(edgeG);
+
+        var nodeG = el("g");
+        NODES.forEach(function (n) {
+          var p = POS[n.id];
+          if (n.shape === "diamond") {
+            var pts = p.cx + "," + p.y + " " + (p.x + p.w) + "," + p.cy + " " + p.cx + "," + (p.y + p.h) + " " + p.x + "," + p.cy;
+            nodeG.appendChild(el("polygon", { points: pts, fill: C.node, stroke: C.accent, "stroke-width": 1.5 }));
+            nodeG.appendChild(el("text", { x: p.cx, y: p.cy + 3, "text-anchor": "middle", fill: C.text, "font-size": 7, "font-weight": "bold" }, n.label));
+          } else {
+            var hi = n.id === "live";
+            nodeG.appendChild(el("rect", {
+              x: p.x, y: p.y, width: p.w, height: p.h, rx: 4,
+              fill: C.node, stroke: hi ? C.accent : C.stroke, "stroke-width": hi ? 2 : 1,
+            }));
+            nodeG.appendChild(el("text", { x: p.cx, y: p.cy + 4, "text-anchor": "middle", fill: C.text, "font-size": 8 }, n.label));
+          }
+        });
+        svg.appendChild(nodeG);
+
+        var fitMode = true;
+        function applyView() {
+          if (fitMode) {
+            svg.style.width = "100%";
+            svg.style.height = "auto";
+            svg.removeAttribute("height");
+          } else {
+            svg.style.width = W + "px";
+            svg.style.height = H + "px";
+          }
+        }
+
+        document.getElementById("btnFit").onclick = function () { fitMode = true; applyView(); };
+        document.getElementById("btnFull").onclick = function () { fitMode = false; applyView(); };
+        window.addEventListener("resize", applyView);
+        applyView();
+      } catch (e) {
+        fail(e.message || String(e));
+      }
+    })();
+  </script>
+</body>
+</html>
