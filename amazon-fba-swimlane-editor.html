@@ -1,871 +1,597 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>亚马逊 FBA 泳道图 · 可编辑</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: #eef1f5; color: #1a1a1a;
-      display: flex; flex-direction: column; height: 100vh;
+{
+  "colW": 132,
+  "lanes": [
+    {
+      "id": "dev",
+      "label": "产品开发"
+    },
+    {
+      "id": "ops",
+      "label": "运营上架"
+    },
+    {
+      "id": "design",
+      "label": "设计部门"
+    },
+    {
+      "id": "purchase",
+      "label": "采购"
+    },
+    {
+      "id": "plan",
+      "label": "计划部门"
+    },
+    {
+      "id": "warehouse",
+      "label": "仓库"
+    },
+    {
+      "id": "logistics",
+      "label": "物流货代"
+    },
+    {
+      "id": "amazon",
+      "label": "亚马逊"
     }
-    header {
-      flex-shrink: 0; padding: 10px 16px; background: #fff; border-bottom: 1px solid #d0d7de;
-      display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
+  ],
+  "colLabels": [
+    "1.选品",
+    "2.分析",
+    "3.规格",
+    "4.打样",
+    "5.包装",
+    "6.供应商",
+    "7.文案，图片",
+    "8.上架",
+    "8.1合规",
+    "9.SKU",
+    "10.需求",
+    "11.视觉",
+    "12.量产",
+    "13.分叉",
+    "14.提交发货计划",
+    "15.发货方式确认",
+    "16.发货归属",
+    "17.创建STA",
+    "18.贴标",
+    "19.出库",
+    "20.货代收货",
+    "21.报关",
+    "22.头程",
+    "23.清关",
+    "24.送达",
+    "25.上架",
+    "26.可售"
+  ],
+  "nodes": [
+    {
+      "id": "mkt",
+      "lane": "dev",
+      "col": 0,
+      "label": "市场调研",
+      "shape": "rect",
+      "eta": "3小时",
+      "parallelGroup": ""
+    },
+    {
+      "id": "comp",
+      "lane": "dev",
+      "col": 1,
+      "label": "竞品分析",
+      "shape": "rect",
+      "eta": "2小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "spec",
+      "lane": "dev",
+      "col": 2,
+      "label": "规格定义",
+      "shape": "rect",
+      "eta": "3小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "sample",
+      "lane": "dev",
+      "col": 3,
+      "label": "打样确认",
+      "shape": "rect",
+      "eta": "5天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "pack",
+      "lane": "dev",
+      "col": 4,
+      "label": "包装方案",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "vendor",
+      "lane": "purchase",
+      "col": 4,
+      "label": "供应商跟踪与确认",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "brand",
+      "lane": "ops",
+      "col": 13,
+      "label": "监控本地仓可用量",
+      "shape": "rect",
+      "eta": "0天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "cert",
+      "lane": "dev",
+      "col": 8,
+      "label": "合规认证",
+      "shape": "rect",
+      "eta": "14天",
+      "parallelGroup": "",
+      "note": "因并行原因，时间不计入，且有的产品不需要\n"
+    },
+    {
+      "id": "copy",
+      "lane": "ops",
+      "col": 7,
+      "label": "Listing文案",
+      "shape": "rect",
+      "eta": "0.5小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "media",
+      "lane": "ops",
+      "col": 10,
+      "label": "摄影，图片需求",
+      "shape": "rect",
+      "eta": "0.5小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "sku",
+      "lane": "ops",
+      "col": 9,
+      "label": "生成SKU",
+      "shape": "rect",
+      "eta": "0.1小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "upload",
+      "lane": "ops",
+      "col": 6,
+      "label": "传Listing",
+      "shape": "rect",
+      "eta": "0.5小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "po",
+      "lane": "purchase",
+      "col": 5,
+      "label": "下采购单",
+      "shape": "rect",
+      "eta": "4小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "mfg",
+      "lane": "purchase",
+      "col": 12,
+      "label": "生产&QC",
+      "shape": "rect",
+      "eta": "21天",
+      "parallelGroup": "",
+      "note": "待插入质检流程"
+    },
+    {
+      "id": "label",
+      "lane": "warehouse",
+      "col": 18,
+      "label": "FNSKU贴标，分仓箱唛",
+      "shape": "rect",
+      "eta": "4小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "sta",
+      "lane": "warehouse",
+      "col": 17,
+      "label": "创建STA",
+      "shape": "rect",
+      "eta": "0.2小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "split",
+      "lane": "ops",
+      "col": 15,
+      "label": "发货方式",
+      "shape": "diamond",
+      "eta": "0",
+      "parallelGroup": "",
+      "note": "依据开发首单的发货方式决定"
+    },
+    {
+      "id": "fac-out",
+      "lane": "purchase",
+      "col": 16,
+      "label": "工厂直发",
+      "shape": "rect",
+      "eta": "3天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "wh-in",
+      "lane": "warehouse",
+      "col": 16,
+      "label": "入本地仓",
+      "shape": "rect",
+      "eta": "10天",
+      "parallelGroup": "",
+      "note": "组包上架时效比工厂长7-10天"
+    },
+    {
+      "id": "wh-out",
+      "lane": "warehouse",
+      "col": 19,
+      "label": "本地仓出库",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "freight",
+      "lane": "logistics",
+      "col": 22,
+      "label": "头程运输",
+      "shape": "rect",
+      "eta": "14天"
+    },
+    {
+      "id": "import",
+      "lane": "logistics",
+      "col": 23,
+      "label": "目的港清关",
+      "shape": "rect",
+      "eta": "3天"
+    },
+    {
+      "id": "deliver",
+      "lane": "amazon",
+      "col": 24,
+      "label": "送达FBA",
+      "shape": "rect",
+      "eta": "2天"
+    },
+    {
+      "id": "receive",
+      "lane": "amazon",
+      "col": 25,
+      "label": "收货上架",
+      "shape": "rect",
+      "eta": "3天"
+    },
+    {
+      "id": "live",
+      "lane": "amazon",
+      "col": 26,
+      "label": "库存可售",
+      "shape": "rect",
+      "eta": "0",
+      "parallelGroup": "",
+      "note": "需补充 推广到返单"
+    },
+    {
+      "id": "node_a2om9",
+      "lane": "ops",
+      "col": 5,
+      "label": "店铺，下单数量确认",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_b6zjk",
+      "lane": "dev",
+      "col": 5,
+      "label": "新品采购登记,发货方式同步与确认",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_b89av",
+      "lane": "plan",
+      "col": 5,
+      "label": "走采购计划",
+      "shape": "rect",
+      "eta": "1小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_bjydv",
+      "lane": "design",
+      "col": 11,
+      "label": "图片生成",
+      "shape": "rect",
+      "eta": "1.5天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_br2qu",
+      "lane": "purchase",
+      "col": 13,
+      "label": "工厂仓可用量",
+      "shape": "rect",
+      "eta": "0天",
+      "parallelGroup": "",
+      "note": "当前是采购提出，运营才会去提交发货计划"
+    },
+    {
+      "id": "node_c3kts",
+      "lane": "ops",
+      "col": 14,
+      "label": "提交发货计划，生成发货单",
+      "shape": "rect",
+      "eta": "0.3小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_cahzb",
+      "lane": "purchase",
+      "col": 17,
+      "label": "创建STA",
+      "shape": "rect",
+      "eta": "0.2小时",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_ck1y0",
+      "lane": "logistics",
+      "col": 21,
+      "label": "报关",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_cmd7c",
+      "lane": "purchase",
+      "col": 19,
+      "label": "工厂出库",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_d8818",
+      "lane": "logistics",
+      "col": 14,
+      "label": "物流方式确认",
+      "shape": "rect",
+      "eta": "1天"
+    },
+    {
+      "id": "node_dj052",
+      "lane": "logistics",
+      "col": 20,
+      "label": "货代收货",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
+    },
+    {
+      "id": "node_dmohz",
+      "lane": "purchase",
+      "col": 18,
+      "label": "工厂贴标",
+      "shape": "rect",
+      "eta": "1天",
+      "parallelGroup": "",
+      "note": ""
     }
-    h1 { margin: 0; font-size: 16px; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    button, label.btn {
-      padding: 5px 11px; border-radius: 6px; border: 1px solid #c8d0d8; background: #fff;
-      font-size: 12px; cursor: pointer;
-    }
-    button.primary { background: #0969da; color: #fff; border-color: #0969da; }
-    button.danger { color: #b42318; border-color: #f5c2c2; }
-    label.btn input { display: none; }
-    #top-bar {
-      flex-shrink: 0; background: #fff; border-bottom: 1px solid #d0d7de; padding: 10px 16px;
-      font-size: 13px; color: #3d444d;
-    }
-    #top-bar .tips { font-size: 12px; color: #5c6570; margin-bottom: 8px; }
-    .edit-row {
-      display: none; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end;
-      padding-top: 8px; border-top: 1px dashed #d0d7de; margin-top: 8px;
-    }
-    .edit-row.active { display: flex; }
-    .edit-row label { font-size: 11px; color: #5c6570; display: flex; flex-direction: column; gap: 3px; }
-    .edit-row input, .edit-row select, .edit-row textarea {
-      padding: 6px 10px; border: 1px solid #c8d0d8; border-radius: 6px; font-size: 14px; min-width: 88px;
-    }
-    main { flex: 1; min-height: 0; overflow: hidden; }
-    #canvas-wrap { height: 100%; overflow: auto; padding: 16px; background: #e8ecf0; }
-    #diagram {
-      display: block; background: #fff; border: 1px solid #c8d0d8; border-radius: 8px;
-      touch-action: none; user-select: none;
-      min-width: 800px; min-height: 400px;
-    }
-    .node.selected rect, .node.selected polygon { stroke: #0969da !important; stroke-width: 2.5 !important; }
-    .col-header.selected rect { fill: #dbeafe !important; stroke: #0969da !important; stroke-width: 1.5 !important; }
-    .lane-band.selected rect { fill: #dbeafe !important; stroke: #0969da !important; stroke-width: 1.5 !important; }
-    .col-header, .lane-band { cursor: grab; }
-    .time-cell { cursor: pointer; }
-    .time-cell.selected rect { fill: #dbeafe !important; stroke: #0969da !important; stroke-width: 1.5 !important; }
-    .toast {
-      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-      background: #1a1a1a; color: #fff; padding: 8px 16px; border-radius: 8px;
-      font-size: 13px; opacity: 0; z-index: 99; pointer-events: none; transition: opacity 0.2s;
-    }
-    .toast.show { opacity: 0.92; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>亚马逊 FBA 泳道图 <span id="buildTag" style="font-size:11px;color:#5c6570;font-weight:normal">v20260529o</span></h1>
-    <div class="toolbar">
-      <button type="button" id="btnZoom90">90%</button>
-      <button type="button" class="primary" id="btnZoom100">100%</button>
-      <button type="button" id="btnZoom125">125%</button>
-      <button type="button" id="btnZoom150">150%</button>
-      <button type="button" id="btnFit">适应宽度</button>
-      <button type="button" id="btnAddLane">+ 泳道</button>
-      <button type="button" id="btnAddCol">+ 阶段列</button>
-      <button type="button" id="btnNormalizeCols">整理列</button>
-      <button type="button" id="btnAddNode">+ 节点</button>
-      <button type="button" class="danger" id="btnDel">删除选中</button>
-      <button type="button" id="btnSave">保存</button>
-      <button type="button" id="btnReset">恢复默认</button>
-      <button type="button" id="btnExport">导出 JSON</button>
-      <label class="btn">导入 JSON<input type="file" id="importFile" accept=".json" /></label>
-    </div>
-  </header>
-  <div id="top-bar">
-    <p class="tips">行（泳道）：点击左侧泳道名选中，双击改名，拖拽上下排序 · 列（阶段）：点击列标题选中，双击改名，拖拽左右排序 · 节点：拖拽改行列，双击改名 · 底部：累计完成时间（支持小时/天）· 并行：紫色框=同组同时开工，用时取最长分支</p>
-    <p id="selHint" style="margin:0;font-size:12px;color:#5c6570">未选中 — 点击泳道名、列标题或节点进行编辑</p>
-
-    <div id="edit-node" class="edit-row">
-      <label>节点名称<input id="fLabel" /></label>
-      <label>泳道<select id="fLane"></select></label>
-      <label>阶段列<input id="fCol" type="number" min="0" style="width:64px" /></label>
-      <label>形状<select id="fShape"><option value="rect">矩形</option><option value="diamond">菱形</option></select></label>
-      <label>预估用时<input id="fEta" placeholder="如 8小时、3天" style="min-width:96px" /></label>
-      <label>并行组<input id="fParallel" placeholder="同组ID=同时开工" style="min-width:120px" title="填写相同组名的节点并行执行" /></label>
-      <label>备注<textarea id="fNote" rows="2" placeholder="可选备注" style="min-width:180px;resize:vertical"></textarea></label>
-      <label>下游 ID<input id="fNext" placeholder="逗号分隔" style="min-width:160px" /></label>
-      <label>节点 ID<input id="fId" /></label>
-      <button type="button" class="primary" id="btnApplyNode">应用节点</button>
-    </div>
-
-    <div id="edit-col" class="edit-row">
-      <label>阶段列名<input id="fColLabel" style="min-width:140px" /></label>
-      <label>列序号<input id="fColIndex" type="number" min="0" style="width:64px" /></label>
-      <button type="button" id="btnColLeft">← 左移</button>
-      <button type="button" id="btnColRight">右移 →</button>
-      <button type="button" class="primary" id="btnApplyCol">应用列</button>
-    </div>
-
-    <div id="edit-lane" class="edit-row">
-      <label>泳道名称<input id="fLaneLabel" style="min-width:140px" /></label>
-      <label>泳道 ID<input id="fLaneId" style="min-width:100px" /></label>
-      <button type="button" id="btnLaneUp">↑ 上移</button>
-      <button type="button" id="btnLaneDown">下移 ↓</button>
-      <button type="button" class="primary" id="btnApplyLane">应用泳道</button>
-    </div>
-  </div>
-  <main>
-    <div id="canvas-wrap">
-      <div id="boot-error" style="display:none;padding:16px;margin:16px;background:#fff5f5;border:1px solid #f5c2c2;border-radius:8px;color:#b42318;font-size:13px"></div>
-      <svg id="diagram" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
-  </main>
-  <div class="toast" id="toast"></div>
-
-  <script>
-/* swimlane-editor build 2026-05-29o column-normalize */
-(function () {
-  var STORAGE_KEY = "amazon-fba-swimlane-v8";
-  var PAD = 14, LANE_W = 112, LANE_H = 76, HEADER_H = 48, COL_H = 30, COL_W = 132;
-  var NODE_W = 104, NODE_H = 40, TIME_H = 58;
-  var scale = 1, fitMode = false, selectionId = "";
-  var svg = null, toast = null, state = null;
-  var dragMode = "", dragIndex = -1;
-  var dragNodeId = "", dragNodeStartCol = 0;
-  var lastNextSnapshot = "";
-
-  var DEFAULT = {
-    colW: 132,
-    lanes: [
-      { id: "plan", label: "计划部门" },
-      { id: "dev", label: "产品开发" },
-      { id: "design", label: "设计部门" },
-      { id: "ops", label: "运营上架" },
-      { id: "purchase", label: "采购" },
-      { id: "warehouse", label: "仓库" },
-      { id: "logistics", label: "物流货代" },
-      { id: "amazon", label: "亚马逊" }
+  ],
+  "edges": [
+    [
+      "cert",
+      "copy"
     ],
-    colLabels: [
-      "①选品","②分析","③规格","④打样","⑤包装","⑥供应商","⑦品牌","⑧合规","⑨文案",
-      "⑩视觉","⑪SKU","⑫上架","⑬采购","⑭量产","⑮贴标","⑯STA","⑰箱唛","⑱分叉",
-      "⑲直发","⑳本地","㉑报关","㉒仓出","㉓头程","㉔清关","㉕送达","㉖上架","㉗可售"
+    [
+      "sku",
+      "upload"
     ],
-    nodes: [
-      { id: "mkt", lane: "plan", col: 0, label: "市场调研", shape: "rect", eta: "3天" },
-      { id: "comp", lane: "plan", col: 1, label: "竞品分析", shape: "rect", eta: "2天" },
-      { id: "spec", lane: "dev", col: 2, label: "规格定义", shape: "rect", eta: "5天" },
-      { id: "sample", lane: "design", col: 3, label: "打样确认", shape: "rect", eta: "7天" },
-      { id: "pack", lane: "design", col: 4, label: "包装方案", shape: "rect", eta: "5天" },
-      { id: "vendor", lane: "purchase", col: 5, label: "供应商定点", shape: "rect", eta: "7天" },
-      { id: "brand", lane: "ops", col: 6, label: "品牌/UPC", shape: "rect", eta: "3天" },
-      { id: "cert", lane: "ops", col: 7, label: "合规认证", shape: "rect", eta: "14天" },
-      { id: "copy", lane: "ops", col: 8, label: "Listing文案", shape: "rect", eta: "3天" },
-      { id: "media", lane: "design", col: 9, label: "图片&A+", shape: "rect", eta: "5天" },
-      { id: "sku", lane: "ops", col: 10, label: "创建SKU", shape: "rect", eta: "4小时" },
-      { id: "upload", lane: "ops", col: 11, label: "上传Listing", shape: "rect", eta: "2天" },
-      { id: "fba", lane: "amazon", col: 11, label: "设置FBA", shape: "rect", eta: "8小时" },
-      { id: "po", lane: "purchase", col: 12, label: "下采购单", shape: "rect", eta: "1天" },
-      { id: "mfg", lane: "purchase", col: 13, label: "生产&QC", shape: "rect", eta: "21天" },
-      { id: "label", lane: "warehouse", col: 14, label: "FNSKU贴标", shape: "rect", eta: "2天" },
-      { id: "sta", lane: "logistics", col: 15, label: "创建STA", shape: "rect", eta: "4小时" },
-      { id: "carton", lane: "logistics", col: 16, label: "分仓箱唛", shape: "rect", eta: "4小时" },
-      { id: "split", lane: "logistics", col: 17, label: "发货方式", shape: "diamond", eta: "0" },
-      { id: "fac-out", lane: "purchase", col: 18, label: "工厂直发", shape: "rect", eta: "1天" },
-      { id: "wh-in", lane: "warehouse", col: 19, label: "入本地仓", shape: "rect", eta: "2天" },
-      { id: "fac-exp", lane: "logistics", col: 20, label: "工厂报关", shape: "rect", eta: "2天" },
-      { id: "wh-out", lane: "warehouse", col: 21, label: "本地仓出库", shape: "rect", eta: "1天" },
-      { id: "freight", lane: "logistics", col: 22, label: "头程运输", shape: "rect", eta: "14天" },
-      { id: "import", lane: "logistics", col: 23, label: "目的港清关", shape: "rect", eta: "3天" },
-      { id: "deliver", lane: "amazon", col: 24, label: "送达FBA", shape: "rect", eta: "2天" },
-      { id: "receive", lane: "amazon", col: 25, label: "收货上架", shape: "rect", eta: "3天" },
-      { id: "live", lane: "amazon", col: 26, label: "库存可售", shape: "rect", eta: "0" }
+    [
+      "po",
+      "mfg"
     ],
-    edges: [
-      ["mkt","comp"],["comp","spec"],["spec","sample"],["sample","pack"],["pack","vendor"],
-      ["vendor","brand"],["brand","cert"],["cert","copy"],["copy","media"],["media","sku"],
-      ["sku","upload"],["upload","fba"],["fba","po"],["po","mfg"],["mfg","label"],["label","sta"],
-      ["sta","carton"],["carton","split"],["split","fac-out"],["split","wh-in"],["fac-out","fac-exp"],
-      ["wh-in","wh-out"],["fac-exp","freight"],["wh-out","freight"],["freight","import"],["import","deliver"],
-      ["deliver","receive"],["receive","live"]
+    [
+      "freight",
+      "import"
+    ],
+    [
+      "import",
+      "deliver"
+    ],
+    [
+      "deliver",
+      "receive"
+    ],
+    [
+      "receive",
+      "live"
+    ],
+    [
+      "mkt",
+      "comp"
+    ],
+    [
+      "pack",
+      "vendor"
+    ],
+    [
+      "pack",
+      "node_b6zjk"
+    ],
+    [
+      "media",
+      "node_bjydv"
+    ],
+    [
+      "split",
+      "fac-out"
+    ],
+    [
+      "split",
+      "wh-in"
+    ],
+    [
+      "brand",
+      "node_c3kts"
+    ],
+    [
+      "mfg",
+      "node_br2qu"
+    ],
+    [
+      "node_c3kts",
+      "split"
+    ],
+    [
+      "fac-out",
+      "node_cahzb"
+    ],
+    [
+      "node_ck1y0",
+      "freight"
+    ],
+    [
+      "node_br2qu",
+      "node_c3kts"
+    ],
+    [
+      "comp",
+      "spec"
+    ],
+    [
+      "spec",
+      "sample"
+    ],
+    [
+      "sample",
+      "pack"
+    ],
+    [
+      "node_b6zjk",
+      "node_a2om9"
+    ],
+    [
+      "vendor",
+      "po"
+    ],
+    [
+      "vendor",
+      "brand"
+    ],
+    [
+      "vendor",
+      "node_b89av"
+    ],
+    [
+      "vendor",
+      "node_a2om9"
+    ],
+    [
+      "vendor",
+      "node_b89av"
+    ],
+    [
+      "node_a2om9",
+      "po"
+    ],
+    [
+      "node_a2om9",
+      "brand"
+    ],
+    [
+      "node_a2om9",
+      "node_b89av"
+    ],
+    [
+      "node_a2om9",
+      "upload"
+    ],
+    [
+      "upload",
+      "copy"
+    ],
+    [
+      "copy",
+      "media"
+    ],
+    [
+      "copy",
+      "sku"
+    ],
+    [
+      "wh-in",
+      "sta"
+    ],
+    [
+      "node_cahzb",
+      "node_dmohz"
+    ],
+    [
+      "label",
+      "wh-out"
+    ],
+    [
+      "node_dmohz",
+      "node_cmd7c"
+    ],
+    [
+      "node_cmd7c",
+      "node_dj052"
+    ],
+    [
+      "wh-out",
+      "node_dj052"
+    ],
+    [
+      "node_dj052",
+      "node_ck1y0"
     ]
-  };
-
-  function clone(v) { return JSON.parse(JSON.stringify(v)); }
-  function laneIndex(id) {
-    var i;
-    for (i = 0; i < state.lanes.length; i++) if (state.lanes[i].id === id) return i;
-    return 0;
-  }
-  function maxCol() {
-    var i, m = state.colLabels.length - 1;
-    for (i = 0; i < state.nodes.length; i++) if (state.nodes[i].col > m) m = state.nodes[i].col;
-    return m < 0 ? 0 : m;
-  }
-  function laneTop(id) { return PAD + HEADER_H + COL_H + laneIndex(id) * LANE_H; }
-  function colLeft(col) { return PAD + LANE_W + col * state.colW; }
-  function totalW() { return PAD * 2 + LANE_W + (maxCol() + 1) * state.colW; }
-  function totalH() { return PAD * 2 + HEADER_H + COL_H + state.lanes.length * LANE_H + TIME_H; }
-  function etaHours(v) {
-    var s = String(v || "").toLowerCase();
-    var n = parseFloat(s.replace(/[^\d.]/g, ""));
-    if (isNaN(n)) return 0;
-    if (s.indexOf("小时") >= 0 || s.indexOf("hour") >= 0 || s.indexOf("h") >= 0) return n;
-    return n * 24;
-  }
-  function fmtT(h) {
-    if (!h) return "—";
-    if (h < 24) return "T+" + (Math.round(h * 10) / 10) + "h";
-    return "T+" + (Math.round((h / 24) * 10) / 10) + "天";
-  }
-  function fmtDur(h) {
-    if (!h) return "0h";
-    if (h < 24) return (Math.round(h * 10) / 10) + "h";
-    return (Math.round((h / 24) * 10) / 10) + "天";
-  }
-  function parallelMeta() {
-    var size = {}, maxH = {}, etas = {}, i, n, gid, h;
-    for (i = 0; i < state.nodes.length; i++) {
-      n = state.nodes[i];
-      gid = n.parallelGroup || "";
-      if (!gid) continue;
-      if (!size[gid]) { size[gid] = 0; maxH[gid] = 0; etas[gid] = []; }
-      size[gid] += 1;
-      h = etaHours(n.eta);
-      if (h > maxH[gid]) maxH[gid] = h;
-      etas[gid].push(n.eta || "—");
-    }
-    return { size: size, maxH: maxH, etas: etas };
-  }
-  function byId() {
-    var m = {}, i;
-    for (i = 0; i < state.nodes.length; i++) m[state.nodes[i].id] = state.nodes[i];
-    return m;
-  }
-  function calcEndHours() {
-    var end = {}, map = byId(), i, k;
-    var predsMap = {}, groups = {}, cols = {}, orderedCols = [];
-
-    for (i = 0; i < state.nodes.length; i++) {
-      end[state.nodes[i].id] = 0;
-      predsMap[state.nodes[i].id] = [];
-      if (!cols[state.nodes[i].col]) cols[state.nodes[i].col] = [];
-      cols[state.nodes[i].col].push(state.nodes[i]);
-      if (orderedCols.indexOf(state.nodes[i].col) < 0) orderedCols.push(state.nodes[i].col);
-    }
-    for (i = 0; i < state.edges.length; i++) {
-      var from = state.edges[i][0], to = state.edges[i][1];
-      if (predsMap[to]) predsMap[to].push(from);
-    }
-    for (i = 0; i < state.nodes.length; i++) {
-      var gid = state.nodes[i].parallelGroup || "";
-      if (!gid) continue;
-      if (!groups[gid]) groups[gid] = [];
-      groups[gid].push(state.nodes[i].id);
-    }
-    orderedCols.sort(function (a, b) { return a - b; });
-
-    function predsEndMax(nodeId, memberSet) {
-      var p = predsMap[nodeId] || [], t, mx = 0;
-      for (t = 0; t < p.length; t++) {
-        if (memberSet && memberSet[p[t]]) continue;
-        if (end[p[t]] > mx) mx = end[p[t]];
-      }
-      return mx;
-    }
-
-    for (k = 0; k < orderedCols.length; k++) {
-      var colNodes = cols[orderedCols[k]] || [];
-      var handled = {};
-      for (i = 0; i < colNodes.length; i++) {
-        var n = colNodes[i];
-        var gid2 = n.parallelGroup || "";
-        if (gid2 && groups[gid2] && groups[gid2].length > 1) {
-          if (handled[gid2]) continue;
-          handled[gid2] = 1;
-          var members = groups[gid2], memberSet = {}, m, start = 0, dur = 0;
-          for (m = 0; m < members.length; m++) memberSet[members[m]] = 1;
-          for (m = 0; m < members.length; m++) {
-            start = Math.max(start, predsEndMax(members[m], memberSet));
-            if (map[members[m]]) dur = Math.max(dur, etaHours(map[members[m]].eta));
-          }
-          for (m = 0; m < members.length; m++) end[members[m]] = start + dur;
-        } else {
-          var s0 = predsEndMax(n.id, null);
-          end[n.id] = s0 + etaHours(n.eta);
-        }
-      }
-    }
-
-    return end;
-  }
-  function nodeBox(n) {
-    var w = n.shape === "diamond" ? 52 : NODE_W;
-    var h = n.shape === "diamond" ? 52 : NODE_H;
-    var x = colLeft(n.col) + (state.colW - w) / 2;
-    var y = laneTop(n.lane) + (LANE_H - h) / 2;
-    return { x: x, y: y, w: w, h: h, cx: x + w / 2, cy: y + h / 2 };
-  }
-  function svgPoint(clientX, clientY) {
-    var pt = svg.createSVGPoint();
-    var ctm;
-    pt.x = clientX;
-    pt.y = clientY;
-    ctm = svg.getScreenCTM();
-    if (!ctm) return { x: 0, y: 0 };
-    return pt.matrixTransform(ctm.inverse());
-  }
-  function colAtX(x) {
-    var c = Math.round((x - PAD - LANE_W - state.colW / 2) / state.colW);
-    if (c < 0) c = 0;
-    if (c > maxCol()) c = maxCol();
-    return c;
-  }
-  function laneAtY(y) {
-    var i = Math.floor((y - PAD - HEADER_H - COL_H) / LANE_H);
-    if (i < 0) i = 0;
-    if (i >= state.lanes.length) i = state.lanes.length - 1;
-    return i;
-  }
-  function moveCol(from, to) {
-    var labels = state.colLabels, oldToNew = {}, order = [], i, moved;
-    if (from === to || from < 0 || to < 0 || from >= labels.length || to >= labels.length) return;
-    for (i = 0; i < labels.length; i++) order.push(i);
-    moved = order.splice(from, 1)[0];
-    order.splice(to, 0, moved);
-    for (i = 0; i < order.length; i++) oldToNew[order[i]] = i;
-    state.colLabels = order.map(function (idx) { return labels[idx]; });
-    for (i = 0; i < state.nodes.length; i++) {
-      if (oldToNew[state.nodes[i].col] !== undefined) state.nodes[i].col = oldToNew[state.nodes[i].col];
-    }
-  }
-  function moveLane(from, to) {
-    var moved;
-    if (from === to || from < 0 || to < 0 || from >= state.lanes.length || to >= state.lanes.length) return;
-    moved = state.lanes.splice(from, 1)[0];
-    state.lanes.splice(to, 0, moved);
-  }
-  function mk(tag, attrs, text) {
-    var e = document.createElementNS("http://www.w3.org/2000/svg", tag), k;
-    for (k in (attrs || {})) if (attrs[k] !== null && attrs[k] !== undefined) e.setAttribute(k, attrs[k]);
-    if (text !== undefined && text !== null) e.textContent = text;
-    return e;
-  }
-  function wrapLines(text, maxChars, maxLines) {
-    var s = String(text || "");
-    var lines = [], cur = "", i, ch;
-    if (!s) return [""];
-    for (i = 0; i < s.length; i++) {
-      ch = s.charAt(i);
-      if (ch === "\n" || ch === "\r") {
-        if (cur) lines.push(cur);
-        cur = "";
-        continue;
-      }
-      cur += ch;
-      if (cur.length >= maxChars) {
-        lines.push(cur);
-        cur = "";
-      }
-      if (lines.length >= maxLines) break;
-    }
-    if (lines.length < maxLines && cur) lines.push(cur);
-    if (!lines.length) lines.push(s.slice(0, maxChars));
-    if (lines.length > maxLines) lines = lines.slice(0, maxLines);
-    return lines;
-  }
-  function updateHint(t) {
-    var h = document.getElementById("selHint");
-    if (h) h.textContent = t;
-  }
-  function showToast(msg) {
-    if (!toast) return;
-    toast.textContent = msg;
-    toast.classList.add("show");
-    setTimeout(function () { toast.classList.remove("show"); }, 2000);
-  }
-  function setZoom(v) {
-    fitMode = false;
-    scale = v;
-    render();
-  }
-  function render() {
-    if (!svg) return;
-    try {
-      var W = totalW(), H = totalH(), i, j, k, n, g, p, edges = state.edges, nodes = state.nodes;
-      var endHours = calcEndHours();
-      var pMeta = parallelMeta();
-      var map = byId();
-      var pos = {};
-      svg.setAttribute("viewBox", "0 0 " + W + " " + H);
-      svg.innerHTML = "";
-
-      var defs = mk("defs");
-      var m = mk("marker", { id: "arr", markerWidth: 6, markerHeight: 6, refX: 5, refY: 3, orient: "auto" });
-      m.appendChild(mk("polygon", { points: "0,0 6,3 0,6", fill: "#0969da" }));
-      defs.appendChild(m); svg.appendChild(defs);
-
-      svg.appendChild(mk("rect", { x: 0, y: 0, width: W, height: H, fill: "#fff" }));
-      svg.appendChild(mk("rect", { x: 0, y: 0, width: W, height: HEADER_H, fill: "#eef2f6" }));
-      svg.appendChild(mk("text", { x: PAD, y: 30, "font-size": 13, "font-weight": "bold", fill: "#1a1a1a" }, "稳定版已加载，可正常渲染与缩放"));
-
-      for (i = 0; i <= maxCol(); i++) {
-        var hg = mk("g", { "data-col": i, class: "col-header" });
-        hg.appendChild(mk("rect", { x: colLeft(i), y: HEADER_H, width: state.colW, height: COL_H, fill: "#eef2f6", stroke: "#c8d0d8", "stroke-width": 0.5 }));
-        hg.appendChild(mk("text", { x: colLeft(i) + state.colW / 2, y: HEADER_H + 20, "text-anchor": "middle", "font-size": 12, fill: "#5c6570" }, state.colLabels[i] || ("阶段" + (i + 1))));
-        (function (idx) {
-          hg.addEventListener("mousedown", function (ev) {
-            ev.preventDefault();
-            dragMode = "col";
-            dragIndex = idx;
-          });
-          hg.addEventListener("dblclick", function (ev) {
-            var v;
-            ev.stopPropagation();
-            v = prompt("阶段列名称", state.colLabels[idx] || "");
-            if (v !== null && v !== "") {
-              state.colLabels[idx] = v;
-              render();
-            }
-          });
-        })(i);
-        svg.appendChild(hg);
-      }
-
-      for (i = 0; i < state.lanes.length; i++) {
-        var lane = state.lanes[i];
-        var y = laneTop(lane.id);
-        var fill = i % 2 === 0 ? "#f8fafc" : "#f0f4f8";
-        var lg = mk("g", { "data-lane": i, class: "lane-band" });
-        lg.appendChild(mk("rect", { x: PAD, y: y, width: LANE_W, height: LANE_H, fill: fill, stroke: "#c8d0d8", "stroke-width": 0.5 }));
-        lg.appendChild(mk("text", { x: PAD + 10, y: y + 44, "font-size": 14, "font-weight": "bold", fill: "#1a1a1a" }, lane.label));
-        (function (idx) {
-          lg.addEventListener("mousedown", function (ev) {
-            ev.preventDefault();
-            dragMode = "lane";
-            dragIndex = idx;
-          });
-          lg.addEventListener("dblclick", function (ev) {
-            var v;
-            ev.stopPropagation();
-            v = prompt("泳道名称", state.lanes[idx].label);
-            if (v !== null && v !== "") {
-              state.lanes[idx].label = v;
-              render();
-            }
-          });
-        })(i);
-        svg.appendChild(lg);
-        svg.appendChild(mk("rect", { x: PAD + LANE_W, y: y, width: (maxCol() + 1) * state.colW, height: LANE_H, fill: fill, stroke: "#c8d0d8", "stroke-width": 0.5 }));
-        for (j = 0; j <= maxCol(); j++) {
-          svg.appendChild(mk("line", { x1: colLeft(j), y1: y, x2: colLeft(j), y2: y + LANE_H, stroke: "#c8d0d8", "stroke-width": 0.5 }));
-        }
-      }
-
-      for (i = 0; i < nodes.length; i++) pos[nodes[i].id] = nodeBox(nodes[i]);
-
-      var groups = {}, gid;
-      for (i = 0; i < nodes.length; i++) {
-        gid = nodes[i].parallelGroup || "";
-        if (!gid) continue;
-        if (!groups[gid]) groups[gid] = [];
-        groups[gid].push(nodes[i]);
-      }
-      for (gid in groups) {
-        var arrG = groups[gid];
-        var minX = 1e9, minY = 1e9, maxX = -1, maxY = -1;
-        if (arrG.length < 2) continue;
-        for (j = 0; j < arrG.length; j++) {
-          p = pos[arrG[j].id];
-          if (!p) continue;
-          if (p.x < minX) minX = p.x;
-          if (p.y < minY) minY = p.y;
-          if (p.x + p.w > maxX) maxX = p.x + p.w;
-          if (p.y + p.h > maxY) maxY = p.y + p.h;
-        }
-        if (maxX > minX && maxY > minY) {
-          svg.appendChild(mk("rect", {
-            x: minX - 8, y: minY - 8, width: maxX - minX + 16, height: maxY - minY + 16, rx: 8,
-            fill: "#f5f3ff", stroke: "#7c3aed", "stroke-width": 1.2, "stroke-dasharray": "6 4"
-          }));
-          svg.appendChild(mk("text", {
-            x: minX - 4, y: minY - 10, "font-size": 10, "font-weight": "bold", fill: "#7c3aed"
-          }, "// 并行 " + gid));
-        }
-      }
-
-      g = mk("g");
-      for (i = 0; i < edges.length; i++) {
-        var a = pos[edges[i][0]], b = pos[edges[i][1]];
-        if (!a || !b) continue;
-        var d = "M" + (a.x + a.w) + "," + a.cy + " L" + ((a.x + a.w + b.x) / 2) + "," + a.cy + " L" + ((a.x + a.w + b.x) / 2) + "," + b.cy + " L" + b.x + "," + b.cy;
-        var path = mk("path", { d: d, fill: "none", stroke: edges[i][2] ? "#8b949e" : "#0969da", "stroke-width": edges[i][2] ? 1.2 : 1.6 });
-        if (edges[i][2]) path.setAttribute("stroke-dasharray", "4 3"); else path.setAttribute("marker-end", "url(#arr)");
-        g.appendChild(path);
-      }
-      svg.appendChild(g);
-
-      for (i = 0; i < nodes.length; i++) {
-        n = nodes[i];
-        p = pos[n.id];
-        g = mk("g", { "data-id": n.id, class: "node" + (selectionId === n.id ? " selected" : "") });
-        if (n.shape === "diamond") {
-          g.appendChild(mk("polygon", { points: p.cx + "," + p.y + " " + (p.x + p.w) + "," + p.cy + " " + p.cx + "," + (p.y + p.h) + " " + p.x + "," + p.cy, fill: "#fff", stroke: "#0969da", "stroke-width": 1.6 }));
-        } else {
-          g.appendChild(mk("rect", { x: p.x, y: p.y, width: p.w, height: p.h, rx: 4, fill: "#fff", stroke: selectionId === n.id ? "#0969da" : "#8b949e", "stroke-width": selectionId === n.id ? 2 : 1 }));
-        }
-        var labelLines = wrapLines(n.label, n.shape === "diamond" ? 5 : 8, n.shape === "diamond" ? 3 : 2);
-        var t = mk("text", { x: p.cx, y: p.cy - ((labelLines.length - 1) * 6) + 4, "text-anchor": "middle", "font-size": 12, fill: "#1a1a1a" });
-        for (k = 0; k < labelLines.length; k++) {
-          var ts = mk("tspan", { x: p.cx, dy: k === 0 ? 0 : 12 }, labelLines[k]);
-          t.appendChild(ts);
-        }
-        g.appendChild(t);
-        if (n.parallelGroup) {
-          g.appendChild(mk("text", {
-            x: p.x + p.w - 4, y: p.y + 11, "text-anchor": "end",
-            "font-size": 9, "font-weight": "bold", fill: "#7c3aed"
-          }, "//"));
-        }
-        if (n.note) {
-          var noteW = Math.min(140, state.colW - 8);
-          var noteX = p.cx - noteW / 2;
-          var noteY = p.y + p.h + 4;
-          var nLines = wrapLines(n.note, 12, 2);
-          g.appendChild(mk("rect", {
-            x: noteX, y: noteY, width: noteW, height: 28,
-            rx: 4, fill: "#fff9db", stroke: "#e3b341", "stroke-width": 1
-          }));
-          for (k = 0; k < nLines.length; k++) {
-            g.appendChild(mk("text", {
-              x: p.cx, y: noteY + 11 + k * 11, "text-anchor": "middle",
-              "font-size": 9, fill: "#5c6570"
-            }, nLines[k]));
-          }
-        }
-        (function (id) {
-          g.addEventListener("mousedown", function (ev) {
-            var nd = findNode(id);
-            if (!nd) return;
-            ev.preventDefault();
-            ev.stopPropagation();
-            selectionId = id;
-            dragMode = "node";
-            dragNodeId = id;
-            dragNodeStartCol = nd.col;
-          });
-          g.addEventListener("click", function (ev) {
-            ev.stopPropagation();
-            selectionId = id;
-            fillNodeForm(id);
-            render();
-          });
-          g.addEventListener("dblclick", function (ev) {
-            ev.stopPropagation();
-            var nd = findNode(id), v;
-            if (!nd) return;
-            v = prompt("节点名称", nd.label);
-            if (v !== null && v !== "") { nd.label = v; render(); }
-          });
-        })(n.id);
-        svg.appendChild(g);
-      }
-
-      var ty = PAD + HEADER_H + COL_H + state.lanes.length * LANE_H;
-      svg.appendChild(mk("rect", { x: PAD, y: ty, width: LANE_W, height: TIME_H, fill: "#fff8e6", stroke: "#c8d0d8", "stroke-width": 0.5 }));
-      svg.appendChild(mk("text", { x: PAD + 8, y: ty + 22, "font-size": 14, "font-weight": "bold", fill: "#1a1a1a" }, "预估完成"));
-      svg.appendChild(mk("text", { x: PAD + 8, y: ty + 40, "font-size": 10, fill: "#5c6570" }, "累计 / 用时"));
-      svg.appendChild(mk("rect", { x: PAD + LANE_W, y: ty, width: (maxCol() + 1) * state.colW, height: TIME_H, fill: "#fffdf5", stroke: "#c8d0d8", "stroke-width": 0.5 }));
-
-      var colNodes = {}, c;
-      for (i = 0; i < nodes.length; i++) {
-        c = nodes[i].col;
-        if (!colNodes[c]) colNodes[c] = [];
-        colNodes[c].push(nodes[i]);
-      }
-      for (i = 0; i <= maxCol(); i++) {
-        svg.appendChild(mk("line", { x1: colLeft(i), y1: ty, x2: colLeft(i), y2: ty + TIME_H, stroke: "#c8d0d8", "stroke-width": 0.5 }));
-        var arr = colNodes[i] || [];
-        var best = null, bestEnd = -1;
-        if (!arr.length) continue;
-        for (j = 0; j < arr.length; j++) {
-          var h = endHours[arr[j].id] || 0;
-          if (h > bestEnd) {
-            bestEnd = h;
-            best = arr[j];
-          }
-        }
-        if (!best) continue;
-        svg.appendChild(mk("text", {
-          x: colLeft(i) + state.colW / 2, y: ty + 16, "text-anchor": "middle",
-          "font-size": 9, fill: "#7a828c"
-        }, "累计"));
-        svg.appendChild(mk("text", {
-          x: colLeft(i) + state.colW / 2, y: ty + 30, "text-anchor": "middle",
-          "font-size": 11, "font-weight": "bold", fill: "#1a1a1a"
-        }, fmtT(bestEnd)));
-        var subTxt = best.eta || "—";
-        if (best.parallelGroup && pMeta.size[best.parallelGroup] > 1) {
-          subTxt = "max(" + pMeta.etas[best.parallelGroup].join(",") + ")=" + fmtDur(pMeta.maxH[best.parallelGroup]);
-        }
-        svg.appendChild(mk("text", {
-          x: colLeft(i) + state.colW / 2, y: ty + 44, "text-anchor": "middle",
-          "font-size": 9, fill: "#5c6570"
-        }, "用时 " + subTxt));
-      }
-
-      if (fitMode) {
-        svg.style.width = "100%";
-        svg.style.height = "auto";
-        svg.style.aspectRatio = W + " / " + H;
-      } else {
-        svg.style.width = Math.round(W * scale) + "px";
-        svg.style.height = Math.round(H * scale) + "px";
-        svg.style.aspectRatio = "auto";
-      }
-      updateHint(selectionId ? ("节点：" + findNode(selectionId).label) : "未选中 — 点击节点进行编辑");
-    } catch (err) {
-      var box = document.getElementById("boot-error");
-      if (box) {
-        box.style.display = "block";
-        box.innerHTML = "<strong>渲染失败</strong><br>" + String(err && err.message ? err.message : err);
-      }
-    }
-  }
-  function findNode(id) {
-    var i;
-    for (i = 0; i < state.nodes.length; i++) if (state.nodes[i].id === id) return state.nodes[i];
-    return null;
-  }
-  function splitIds(s) {
-    var a = String(s || "").split(/[,，\s]+/), out = [], i;
-    for (i = 0; i < a.length; i++) if (a[i]) out.push(a[i]);
-    return out;
-  }
-  function circledNo(n) {
-    var map = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳";
-    if (n >= 1 && n <= 20) return map.charAt(n - 1);
-    return (n < 10 ? "0" + n : String(n));
-  }
-  function normalizeColumnsByContent() {
-    var colNodes = {}, i, n, cols = [], c, endHours, avg, remap = {};
-    endHours = calcEndHours();
-    for (i = 0; i < state.nodes.length; i++) {
-      n = state.nodes[i];
-      c = n.col;
-      if (!colNodes[c]) colNodes[c] = [];
-      colNodes[c].push(n);
-    }
-    for (c in colNodes) {
-      if (!colNodes.hasOwnProperty(c)) continue;
-      var arr = colNodes[c];
-      var sum = 0;
-      for (i = 0; i < arr.length; i++) sum += (endHours[arr[i].id] || 0);
-      avg = arr.length ? (sum / arr.length) : 0;
-      cols.push({ oldCol: parseInt(c, 10), nodes: arr, avgEnd: avg });
-    }
-    cols.sort(function (a, b) {
-      if (a.avgEnd !== b.avgEnd) return a.avgEnd - b.avgEnd;
-      return a.oldCol - b.oldCol;
-    });
-    for (i = 0; i < cols.length; i++) remap[cols[i].oldCol] = i;
-    for (i = 0; i < state.nodes.length; i++) {
-      n = state.nodes[i];
-      n.col = remap[n.col];
-    }
-    state.colLabels = [];
-    for (i = 0; i < cols.length; i++) {
-      var labels = [], j;
-      for (j = 0; j < cols[i].nodes.length; j++) labels.push(cols[i].nodes[j].label);
-      labels.sort();
-      var base = labels[0] || ("阶段" + (i + 1));
-      if (labels.length > 1) base = base + "等" + labels.length;
-      state.colLabels.push(circledNo(i + 1) + base);
-    }
-    showToast("列已整理：重命名/排序/删空列");
-  }
-  function fillNodeForm(id) {
-    var n = findNode(id), i, laneSel = document.getElementById("fLane"), html = "";
-    if (!n || !laneSel) return;
-    document.getElementById("fId").value = n.id;
-    document.getElementById("fLabel").value = n.label;
-    document.getElementById("fCol").value = n.col;
-    document.getElementById("fShape").value = n.shape || "rect";
-    document.getElementById("fEta").value = n.eta || "";
-    document.getElementById("fParallel").value = n.parallelGroup || "";
-    document.getElementById("fNote").value = n.note || "";
-    var nexts = [], eIdx;
-    for (eIdx = 0; eIdx < state.edges.length; eIdx++) {
-      if (state.edges[eIdx][0] === n.id) nexts.push(state.edges[eIdx][1]);
-    }
-    lastNextSnapshot = nexts.join(",");
-    document.getElementById("fNext").value = lastNextSnapshot;
-    for (i = 0; i < state.lanes.length; i++) html += "<option value=\"" + state.lanes[i].id + "\">" + state.lanes[i].label + "</option>";
-    laneSel.innerHTML = html;
-    laneSel.value = n.lane;
-    document.getElementById("edit-node").classList.add("active");
-  }
-  function applyNodePanel() {
-    var id = selectionId || document.getElementById("fId").value;
-    var n = findNode(id), i, toList, nextRaw, oldDash = {}, oldNext = [], e, normOld, normNew;
-    if (!n) return;
-    n.label = document.getElementById("fLabel").value || n.label;
-    n.lane = document.getElementById("fLane").value || n.lane;
-    n.col = parseInt(document.getElementById("fCol").value, 10);
-    if (isNaN(n.col) || n.col < 0) n.col = 0;
-    n.shape = document.getElementById("fShape").value || "rect";
-    n.eta = document.getElementById("fEta").value || n.eta || "1天";
-    n.parallelGroup = document.getElementById("fParallel").value || "";
-    n.note = document.getElementById("fNote").value || "";
-    for (i = 0; i < state.edges.length; i++) {
-      e = state.edges[i];
-      if (e[0] === n.id) {
-        oldNext.push(e[1]);
-        if (e[2]) oldDash[e[1]] = true;
-      }
-    }
-    nextRaw = document.getElementById("fNext").value;
-    normOld = oldNext.join(",");
-    normNew = splitIds(nextRaw).join(",");
-    if (String(nextRaw).trim() !== "" && normNew !== normOld) {
-      state.edges = state.edges.filter(function (edge) { return edge[0] !== n.id; });
-      toList = splitIds(nextRaw);
-      for (i = 0; i < toList.length; i++) {
-        if (oldDash[toList[i]]) state.edges.push([n.id, toList[i], true]);
-        else state.edges.push([n.id, toList[i]]);
-      }
-      lastNextSnapshot = normNew;
-    }
-    render();
-    showToast("节点已更新");
-  }
-  function addNode() {
-    var id = "node_" + Date.now().toString(36).slice(-5);
-    state.nodes.push({ id: id, lane: state.lanes[0].id, col: maxCol(), label: "新节点", shape: "rect", eta: "1天" });
-    selectionId = id;
-    fillNodeForm(id);
-    render();
-  }
-  function addCol() { state.colLabels.push("阶段" + (state.colLabels.length + 1)); render(); }
-  function addLane() { state.lanes.push({ id: "lane_" + Date.now().toString(36).slice(-5), label: "新泳道" }); render(); }
-  function delSelected() {
-    if (!selectionId) return;
-    state.nodes = state.nodes.filter(function (n) { return n.id !== selectionId; });
-    state.edges = state.edges.filter(function (e) { return e[0] !== selectionId && e[1] !== selectionId; });
-    selectionId = "";
-    render();
-  }
-  function onSvgMouseMove(ev) {
-    var sp, target, nd, laneIdx, laneId;
-    if (!dragMode) return;
-    sp = svgPoint(ev.clientX, ev.clientY);
-    if (dragMode === "node") {
-      nd = findNode(dragNodeId);
-      if (!nd) return;
-      target = colAtX(sp.x);
-      laneIdx = laneAtY(sp.y);
-      laneId = state.lanes[laneIdx] ? state.lanes[laneIdx].id : nd.lane;
-      if (nd.col !== target || nd.lane !== laneId) {
-        nd.col = target;
-        nd.lane = laneId;
-        render();
-      }
-    } else if (dragMode === "col") {
-      target = colAtX(sp.x);
-      if (target !== dragIndex) {
-        moveCol(dragIndex, target);
-        dragIndex = target;
-        render();
-      }
-    } else if (dragMode === "lane") {
-      target = laneAtY(sp.y);
-      if (target !== dragIndex) {
-        moveLane(dragIndex, target);
-        dragIndex = target;
-        render();
-      }
-    }
-  }
-  function onSvgMouseUp() {
-    dragMode = "";
-    dragIndex = -1;
-    dragNodeId = "";
-  }
-  function saveState() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
-    showToast("已保存");
-  }
-  function resetState() {
-    if (!confirm("恢复默认？本地修改将丢失")) return;
-    state = clone(DEFAULT);
-    selectionId = "";
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-    render();
-    setZoom(1);
-  }
-  function exportJson() {
-    var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "amazon-fba-swimlane.json";
-    a.click();
-  }
-  function importJson(ev) {
-    var f = ev.target.files[0], r;
-    if (!f) return;
-    r = new FileReader();
-    r.onload = function () {
-      try {
-        state = JSON.parse(r.result);
-        if (!state.lanes || !state.nodes || !state.colLabels || !state.edges) throw new Error("JSON结构不完整");
-        selectionId = "";
-        render();
-        showToast("导入成功");
-      } catch (e) {
-        alert("JSON 无效: " + e.message);
-      }
-    };
-    r.readAsText(f);
-    ev.target.value = "";
-  }
-  function bind(id, fn) { var e = document.getElementById(id); if (e) e.addEventListener("click", fn); }
-  function boot() {
-    var raw;
-    svg = document.getElementById("diagram");
-    toast = document.getElementById("toast");
-    bind("btnZoom90", function () { setZoom(0.9); });
-    bind("btnZoom100", function () { setZoom(1); });
-    bind("btnZoom125", function () { setZoom(1.25); });
-    bind("btnZoom150", function () { setZoom(1.5); });
-    bind("btnFit", function () { fitMode = true; render(); });
-    bind("btnAddNode", addNode);
-    bind("btnAddCol", addCol);
-    bind("btnNormalizeCols", function () { normalizeColumnsByContent(); render(); });
-    bind("btnAddLane", addLane);
-    bind("btnDel", delSelected);
-    bind("btnSave", saveState);
-    bind("btnReset", resetState);
-    bind("btnExport", exportJson);
-    bind("btnApplyNode", applyNodePanel);
-    bind("btnApplyCol", render);
-    bind("btnApplyLane", render);
-    bind("btnColLeft", render);
-    bind("btnColRight", render);
-    bind("btnLaneUp", render);
-    bind("btnLaneDown", render);
-    document.getElementById("importFile").addEventListener("change", importJson);
-    if (svg) svg.addEventListener("click", function () { selectionId = ""; render(); });
-    window.addEventListener("mousemove", onSvgMouseMove);
-    window.addEventListener("mouseup", onSvgMouseUp);
-    try {
-      raw = localStorage.getItem(STORAGE_KEY);
-      state = raw ? JSON.parse(raw) : clone(DEFAULT);
-    } catch (e) {
-      state = clone(DEFAULT);
-    }
-    render();
-    setZoom(1);
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
-})();
-  </script>
-</body>
-</html>
+  ]
+}
